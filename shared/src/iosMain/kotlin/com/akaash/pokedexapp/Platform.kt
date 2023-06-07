@@ -1,13 +1,10 @@
 package com.akaash.pokedexapp
 
-import androidx.compose.ui.window.ComposeUIViewController
-import com.akaash.pokedexapp.ui.PokedexScreen
-import platform.UIKit.UIDevice
+ import platform.UIKit.UIDevice
 
-class IOSPlatform : Platform {
-    override val name: String = UIDevice.currentDevice.systemName() + " " + UIDevice.currentDevice.systemVersion
-}
+//class IOSPlatform : Platform {
+//    override val name: String = UIDevice.currentDevice.systemName() + " " + UIDevice.currentDevice.systemVersion
+//}
+//
+//actual fun getPlatform(): Platform = IOSPlatform()
 
-actual fun getPlatform(): Platform = IOSPlatform()
-
-fun MainViewController() = ComposeUIViewController { PokedexScreen() }

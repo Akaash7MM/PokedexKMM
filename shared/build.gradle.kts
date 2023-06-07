@@ -2,7 +2,9 @@
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
-    id("org.jetbrains.compose")
+    kotlin("plugin.serialization") version "1.8.10"
+    id("com.google.devtools.ksp").version("1.8.10-1.0.9")
+    id("com.rickclephas.kmp.nativecoroutines").version("1.0.0-ALPHA-5")
 }
 
 kotlin {
@@ -18,7 +20,6 @@ kotlin {
         }
     }
     val ktor_version = "2.3.0"
-    val preComposeVersion = "1.4.1"
 
     sourceSets {
         val commonMain by getting {
@@ -28,14 +29,8 @@ kotlin {
                 implementation("io.ktor:ktor-client-logging:$ktor_version")
                 implementation("io.ktor:ktor-serialization-kotlinx-json:$ktor_version")
                 implementation("io.ktor:ktor-client-content-negotiation:$ktor_version")
-                implementation(compose.runtime)
-                implementation(compose.foundation)
-                implementation(compose.animation)
-                implementation(compose.material)
-                @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
-                implementation(compose.components.resources)
-                implementation("moe.tlaster:precompose:$preComposeVersion")
-                implementation("moe.tlaster:precompose-viewmodel:$preComposeVersion")
+                api("com.rickclephas.kmm:kmm-viewmodel-core:1.0.0-ALPHA-4")
+                api("org.kodein.di:kodein-di:7.20.1")
             }
         }
         val commonTest by getting {
@@ -45,9 +40,9 @@ kotlin {
         }
         val androidMain by getting {
             dependencies {
-                api("androidx.activity:activity-compose:1.7.1")
+                api("androidx.activity:activity-compose:1.7.2")
                 api("androidx.appcompat:appcompat:1.6.1")
-                api("androidx.core:core-ktx:1.10.0")
+                api("androidx.core:core-ktx:1.10.1")
 
                 implementation("io.ktor:ktor-client-android:$ktor_version")
             }
@@ -76,12 +71,18 @@ kotlin {
         }
     }
 }
+kotlin.sourceSets.all {
+    languageSettings.optIn("kotlin.experimental.ExperimentalObjCName")
+}
 
 android {
     namespace = "com.akaash.pokedexapp"
     compileSdk = 33
     defaultConfig {
         minSdk = 26
-        targetSdk = 33
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 }

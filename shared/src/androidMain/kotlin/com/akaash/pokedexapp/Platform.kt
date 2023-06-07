@@ -1,8 +1,7 @@
 package com.akaash.pokedexapp
 
 import androidx.compose.runtime.Composable
-import com.akaash.pokedexapp.ui.PokedexScreen
-import io.ktor.client.engine.HttpClientEngine
+//import com.akaash.pokedexapp.android.PokedexScreen
 
 //class AndroidPlatform : Platform {
 //    override val name: String = "Android ${android.os.Build.VERSION.SDK_INT}"
@@ -10,5 +9,5 @@ import io.ktor.client.engine.HttpClientEngine
 //
 //actual fun getPlatform(): Platform = AndroidPlatform()
 
-@Composable
-fun MainView() = PokedexScreen()
+//@Composable
+//fun MainView() = PokedexScreen()

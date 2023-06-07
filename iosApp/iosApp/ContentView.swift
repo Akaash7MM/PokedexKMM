@@ -1,11 +1,12 @@
 import SwiftUI
 import shared
+import KMPNativeCoroutinesAsync
 
 struct ContentView: View {
-	let greet = Greeting().greet()
-
+    let viewmodel = PokedexVM().getPokedexViewModel()
 	var body: some View {
-		Text(greet)
+        let result = await asyncResult(for: viewmodel.pokemonList)
+        
 	}
 }
 
